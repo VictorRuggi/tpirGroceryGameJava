@@ -4,7 +4,7 @@ import java.math.*;
 
 public class TPIRGroceryGame {
 	public static void main(String[] args) {
-		ArrayList<GroceryItem> groceryItems = new ArrayList<GroceryItem>(); //Total Grocery Items this game can pick from.
+		ArrayList<GroceryItem> groceryItems = new ArrayList<GroceryItem>(); //Total Grocery Items this game can pick from. Thank you to the Provigo supermarket flyer for giving me rough estimates of the cost of each item when not on special.
 
 		groceryItems.add( new GroceryItem("cereal", "525 gram box of Shredded Wheat cereal, high in fiber and sugar free", new BigDecimal(Math.random()*2 + 2, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("corn syrup", "1 liter bottle of No Name corn syrup", new BigDecimal(Math.random()*2 + 4, new MathContext(3))) );
@@ -20,7 +20,7 @@ public class TPIRGroceryGame {
 		groceryItems.add( new GroceryItem("worcestershire sauce", "295 milliliter bottle of French's Worcestershire sauce", new BigDecimal(Math.random() + 3.2, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("noodle mix", "200 gram box of Betty Crocker Hamburger Helper noodle mix", new BigDecimal(Math.random() + 2.1, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("vinegar", "500 milliliter bottle of President's Choice vinegar", new BigDecimal(Math.random()*2 + 3, new MathContext(3))) );
-		groceryItems.add( new GroceryItem("kettle chips", "45 gram bag of Kettle brand potato chips", new BigDecimal(Math.random() + 0.6, new MathContext(3))) );
+		groceryItems.add( new GroceryItem("kettle chips", "45 gram bag of Kettle brand potato chips", new BigDecimal(Math.random() + 0.5, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("couscous", "907 gram bag of Clic brand couscous", new BigDecimal(Math.random() + 3.6, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("milkshake drink", "473 milliliter bottle of Coffee Crisp chocolate flavored milkshake drink", new BigDecimal(Math.random() + 1, new MathContext(3))) );
 		groceryItems.add( new GroceryItem("brownie mix", "450 gram box of Duncan Hines brownie mix", new BigDecimal(Math.random() + 2.2, new MathContext(3))) );
@@ -52,6 +52,13 @@ public class TPIRGroceryGame {
 			groceryItems.remove(picker);
 		}
 
+		/*FORMATTING*/
+		for(int i=0;i<itemsInGame.size();i++){
+			if(itemsInGame.get(i).getItemPrice().compareTo(new BigDecimal("1.00")) < 1){
+				itemsInGame.get(i).getItemPrice().round(new MathContext(2));
+			}
+		}
+
 		System.out.println("THE PRICE IS RIGHT - GROCERY GAME\nFinish with a total between $20 and $22 by purchasing these common grocery items to win!\nThese are the items on display today. They are as follows:\n");
 		for(int i=0;i<itemsInGame.size();i++){
 			System.out.println(itemsInGame.get(i).getItemName() + "\n" + itemsInGame.get(i).getDesc() + "\n");
@@ -74,7 +81,14 @@ public class TPIRGroceryGame {
 
 				for(int i=0;i<itemsInGame.size();i++){
 					if(itemsInGame.get(i).getItemName().indexOf(inputItem) != -1){
-						itemPrice = itemsInGame.get(i).getItemPrice();
+						/*FORMATTING*/
+						if(itemsInGame.get(i).getItemPrice().doubleValue() < 1){
+							itemPrice = itemsInGame.get(i).getItemPrice().round(new MathContext(2));
+						}
+						else {
+							itemPrice = itemsInGame.get(i).getItemPrice();
+						}
+
 						total = total.add( itemPrice.multiply(new BigDecimal(quantity, new MathContext(3))) );
 						itemsInGame.remove(i);
 					}

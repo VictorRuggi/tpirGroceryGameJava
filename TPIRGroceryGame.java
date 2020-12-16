@@ -73,7 +73,6 @@ public class TPIRGroceryGame {
 				/*POPULAR REPLACEMENTS*/
 				inputItem = inputItem.replaceAll("canada dry", "ginger ale");
 				inputItem = inputItem.replaceAll("hamburger helper", "noodle mix");
-				inputItem = inputItem.replaceAll("eggo", "waffles");
 				inputItem = inputItem.replaceAll("eggos", "waffles");
 
 				String inputQuantity = JOptionPane.showInputDialog("Enter the quantity of this item that you would like to purchase, minimum 1");

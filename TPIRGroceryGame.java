@@ -80,7 +80,7 @@ public class TPIRGroceryGame {
 				quantity = Integer.parseInt(inputQuantity);
 
 				for(int i=0;i<itemsInGame.size();i++){
-					if(itemsInGame.get(i).getItemName().indexOf(inputItem) != -1){
+					if(itemsInGame.get(i).getItemName().equalsIgnoreCase(inputItem)){
 						/*FORMATTING*/
 						if(itemsInGame.get(i).getItemPrice().doubleValue() < 1){
 							itemPrice = itemsInGame.get(i).getItemPrice().round(new MathContext(2));
